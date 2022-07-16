@@ -45,7 +45,10 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=3),
     "ROTATE_REFRESH_TOKENS": True,
     "SIGNING_KEY": SECRET_KEY,
+    "USER_AUTHENTICATION_RULE": "users.utils.auth_rule",
 }
+
+CODE_EXPIRATION_SECONDS = 180
 
 INSTALLED_APPS = [
     "django.contrib.admin",

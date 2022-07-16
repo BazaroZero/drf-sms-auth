@@ -1,3 +1,6 @@
+from datetime import datetime, timedelta, timezone
+
+from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
 
@@ -15,3 +18,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     def set_password_and_send_code(self, phone: str, raw_password: str) -> None:
         super().set_password(raw_password)
         send_sms(phone, raw_password)
+
+    def is_code_expired(self) -> bool:
+        return (datetime.now(timezone.utc) - self.code_created_at) > timedelta(
+            seconds=settings.CODE_EXPIRATION_SECONDS
+        )
