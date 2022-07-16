@@ -13,6 +13,6 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
     def update(self, instance: User, _):
         code = User.objects.make_random_password(4, "0123456789")
-        instance.set_password_and_send_code(code)
+        instance.set_password_and_send_code(instance.phone, code)
         instance.save()
         return instance

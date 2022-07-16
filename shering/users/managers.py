@@ -5,7 +5,7 @@ class UserManager(BaseUserManager):
     def create_user(self, phone):
         user = self.model(phone=phone)
         code = self.make_random_password(4, "0123456789")
-        user.set_password_and_send_code(code)
+        user.set_password_and_send_code(phone, code)
         user.save()
         return user
 
