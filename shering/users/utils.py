@@ -9,3 +9,4 @@ def auth_rule(user):
     if user is not None and user.is_active:
         if user.is_code_expired():
             raise exceptions.AuthenticationFailed("Code has expired")
+        return True
