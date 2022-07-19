@@ -2,6 +2,7 @@ from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
 from rest_framework.response import Response
+from rest_framework.exceptions import ValidationError
 from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
@@ -34,7 +35,10 @@ class RegistrationAPIView(APIView):
     @swagger_auto_schema(request_body=serializer_class)
     def put(self, request):
         """Authentication method. Updates code for user and sends SMS again"""
-        user = User.objects.get(phone=request.data["phone"])
+        try:
+            user = User.objects.get(phone=request.data["phone"])
+        except User.DoesNotExist:
+            raise ValidationError("User with this phone doesn't exist")
         serializer = self.serializer_class(data=request.data, instance=user)
         serializer.is_valid(raise_exception=True)
         serializer.save()
