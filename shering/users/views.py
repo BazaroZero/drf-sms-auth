@@ -24,7 +24,9 @@ class RegistrationAPIView(APIView):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-    @swagger_auto_schema(request_body=serializer_class)
+    @swagger_auto_schema(
+        request_body=serializer_class, responses=schemas.user_put_response
+    )
     def put(self, request):
         """Authentication method. Updates code for user and sends SMS again"""
         try:

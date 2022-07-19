@@ -9,6 +9,13 @@ user_post_response = {
     ),
 }
 
+user_put_response = {
+    "400": openapi.Response(
+        description="Error: Bad Request",
+        examples={"application/json": ["User with this phone doesn't exist"]},
+    ),
+}
+
 pair_response = {
     "200": openapi.Response(
         description="",
