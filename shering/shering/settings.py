@@ -37,7 +37,7 @@ ALLOWED_HOSTS = []
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
-    )
+    ),
 }
 
 SIMPLE_JWT = {
@@ -48,7 +48,15 @@ SIMPLE_JWT = {
     "USER_AUTHENTICATION_RULE": "users.utils.auth_rule",
 }
 
+
 CODE_EXPIRATION_SECONDS = 180
+
+SWAGGER_SETTINGS = {
+    "SECURITY_DEFINITIONS": {
+        "Bearer": {"type": "apiKey", "name": "Authorization", "in": "header"},
+    },
+    "USE_SESSION_AUTH": False,
+}
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -58,6 +66,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "drf_yasg",
     "users",
 ]
 
