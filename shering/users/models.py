@@ -19,7 +19,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         super().set_password(raw_password)
         send_sms(phone, raw_password)
 
-    def is_code_expired(self) -> bool:
+    def is_code_expired(self, seconds: int = settings.CODE_EXPIRATION_SECONDS) -> bool:
         return (datetime.now(timezone.utc) - self.code_created_at) > timedelta(
-            seconds=settings.CODE_EXPIRATION_SECONDS
+            seconds=seconds
         )

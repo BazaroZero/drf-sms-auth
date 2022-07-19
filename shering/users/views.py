@@ -30,9 +30,13 @@ class RegistrationAPIView(APIView):
     def put(self, request):
         """Authentication method. Updates code for user and sends SMS again"""
         try:
-            user = User.objects.get(phone=request.data["phone"])
+            user: User = User.objects.get(phone=request.data["phone"])
         except User.DoesNotExist:
             raise ValidationError("User with this phone doesn't exist")
+        if not user.is_code_expired(60):
+            raise ValidationError(
+                "Can't send SMS earlier than 60 seconds after previous"
+            )
         serializer = self.serializer_class(data=request.data, instance=user)
         serializer.is_valid(raise_exception=True)
         serializer.save()
