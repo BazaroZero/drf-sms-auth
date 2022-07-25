@@ -29,7 +29,7 @@ class RegistrationAPIView(APIView):
         request_body=serializer_class, responses=schemas.user_put_response
     )
     def put(self, request):
-        """Authentication method. Updates code for user and sends SMS again"""
+        """Sign in method. Updates code for user and sends SMS again"""
         try:
             user: User = User.objects.get(phone=request.data["phone"])
         except User.DoesNotExist:
@@ -45,12 +45,22 @@ class RegistrationAPIView(APIView):
 
 
 class DecoratedTokenObtainPairView(TokenObtainPairView):
+    """
+    Takes a set of user credentials and returns an access and refresh JSON web
+    token pair to prove the authentication of those credentials.
+    """
+
     @swagger_auto_schema(responses=schemas.pair_response)
     def post(self, request, *args, **kwargs):
         return super().post(request, *args, **kwargs)
 
 
 class DecoratedTokenRefreshView(TokenRefreshView):
+    """
+    Takes a refresh type JSON web token and returns an access type JSON web
+    token if the refresh token is valid.
+    """
+
     @swagger_auto_schema(responses=schemas.refresh_response)
     def post(self, request, *args, **kwargs):
         return super().post(request, *args, **kwargs)
