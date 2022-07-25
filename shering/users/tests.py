@@ -1,9 +1,10 @@
 from time import sleep
+
 from django.conf import settings
 from django.test import override_settings
 from django.urls import reverse
-from rest_framework.test import APITestCase
 from rest_framework import status
+from rest_framework.test import APITestCase
 
 
 class UsersTest(APITestCase):
