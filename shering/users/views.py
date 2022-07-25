@@ -1,3 +1,4 @@
+from django.conf import settings
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
 from rest_framework.exceptions import ValidationError
@@ -33,9 +34,9 @@ class RegistrationAPIView(APIView):
             user: User = User.objects.get(phone=request.data["phone"])
         except User.DoesNotExist:
             raise ValidationError("User with this phone doesn't exist")
-        if not user.is_code_expired(60):
+        if not user.is_code_expired(settings.CODE_RESEND_TIMEOUT):
             raise ValidationError(
-                "Can't send SMS earlier than 60 seconds after previous"
+                f"Can't send SMS earlier than {settings.CODE_RESEND_TIMEOUT} seconds after previous"
             )
         serializer = self.serializer_class(data=request.data, instance=user)
         serializer.is_valid(raise_exception=True)
