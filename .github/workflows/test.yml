@@ -51,4 +51,4 @@ jobs:
         run: cp drf-sms-auth/config/.env.example drf-sms-auth/config/.env
 
       - name: Test app
-        run: cd drf-sms-auth && python manage.py test
+        run: cd drf-sms-auth && poetry run python manage.py test
