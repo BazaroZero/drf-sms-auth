@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+  db:
+    container_name: postgres_container
+    image: postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - ${POSTGRES_PORT}:5432
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4
+    depends_on:
+      - db
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "pgadmin4@pgadmin.org"
+      PGADMIN_DEFAULT_PASSWORD: "admin"
+    ports:
+      - 8080:80
