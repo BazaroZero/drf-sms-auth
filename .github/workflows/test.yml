@@ -45,7 +45,7 @@ jobs:
 
       - name: Install dependencies
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-        run: poetry install
+        run: poetry install --no-dev
 
       - name: Copy .env.example file
         run: cp drf-sms-auth/config/.env.example drf-sms-auth/config/.env
