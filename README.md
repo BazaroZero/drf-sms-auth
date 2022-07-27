@@ -1,6 +1,6 @@
 # SMS auth on Django Rest
 
-## Usage
+## Usage :envelope:
 
 You should have poetry and docker installed
 
@@ -29,3 +29,13 @@ python manage.py migrate
 ```
 python manage.py runserver
 ```
+
+## Customization :pencil2:
+
+### Sending SMS
+
+Replace dummy function in drf-sms-auth\users\utils.py with your own
+
+### Constants
+
+In settings.py you can edit **CODE_EXPIRATION_SECONDS** and **CODE_RESEND_TIMEOUT**, variables of [simple_jwt](https://github.com/jazzband/djangorestframework-simplejwt) library which is used for tokens implementation etc
