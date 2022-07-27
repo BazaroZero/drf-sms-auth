@@ -1,4 +1,4 @@
-"""shering URL Configuration
+"""drf-sms-auth URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.0/topics/http/urls/
@@ -20,9 +20,9 @@ from drf_yasg.views import get_schema_view
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="Shering API",
+        title="SMS auth",
         default_version="0.1.0",
-        description="App for renting/selling goods and services",
+        description="Pet project dedicated to Django Rest",
     ),
     public=True,
 )

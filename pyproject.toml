@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "shering-api"
+name = "drf-sms-auth"
 version = "0.1.0"
-description = ""
+description = "Pet project dedicated to Django Rest"
 authors = ["BazaroZero <finatov05@gmail.com>"]
 
 [tool.poetry.dependencies]

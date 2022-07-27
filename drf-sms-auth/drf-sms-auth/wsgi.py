@@ -1,5 +1,5 @@
 """
-WSGI config for shering project.
+WSGI config for drf-sms-auth project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "shering.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "drf-sms-auth.settings")
 
 application = get_wsgi_application()
